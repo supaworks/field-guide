@@ -8,6 +8,7 @@ venv/
 .venv/
 ENV/
 env/
+supa/
 
 # Distribution / packaging
 dist/
