@@ -1,6 +1,6 @@
 # field-guide
 
-All kinds of examples and field tests using [SUPA](https://supa.works). 🧪
+> All kinds of examples and field tests using [SUPA](https://supa.works). Build GDPR-Compliant AI Apps. 🧪
 
 This repository houses cool stuff around AI and LLMs across multiple coding languages. All use cases leverage SUPA endpoints.
 
