@@ -5,10 +5,14 @@ from openai import OpenAI
 st.set_page_config(page_title="SUPA Chat", page_icon="💬")
 st.title("💬 SUPA Chat")
 
+# Check if API token is configured
+if "SUPA_API_TOKEN" not in st.secrets:
+    st.error("⚠️ SUPA API token not configured. Please add it to `.streamlit/secrets.toml`")
+    st.stop()
+
 # Initialize the OpenAI client with SUPA endpoint
-# The API key is read from Streamlit secrets or environment variable
 client = OpenAI(
-    api_key=st.secrets.get("SUPA_API_TOKEN", ""),
+    api_key=st.secrets["SUPA_API_TOKEN"],
     base_url="https://api.supa.works/openai",
 )
 
@@ -43,9 +47,9 @@ if prompt := st.chat_input("What would you like to talk about?"):
         )
         # Stream the response
         response = st.write_stream(
-            chunk.choices[0].delta.content or ""
+            chunk.choices[0].delta.content
             for chunk in stream
-            if chunk.choices[0].delta.content is not None
+            if chunk.choices[0].delta.content
         )
 
     # Add assistant response to chat history
