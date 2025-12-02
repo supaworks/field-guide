@@ -5,19 +5,23 @@ A beginner-friendly example showing how to use the OpenAI SDK with [SUPA](https:
 ## 📖 What is this?
 
 This project demonstrates how to:
+
 - Use the **OpenAI SDK** (the official library from OpenAI) to talk to AI models
-- Connect to **SUPA** instead of OpenAI's servers (SUPA acts as a proxy/gateway to various AI models)
+- Connect to **SUPA** instead of OpenAI's servers
 - Keep your API token safe using environment variables
 
 ## 🧠 Understanding the Basics
 
 ### What is Bun?
+
 [Bun](https://bun.sh) is a fast JavaScript/TypeScript runtime (like Node.js, but faster!). It can run TypeScript files directly without needing to compile them first.
 
 ### What is the OpenAI SDK?
+
 The OpenAI SDK is a library that makes it easy to communicate with AI models. Think of it like a translator that helps your code "talk" to AI services.
 
 ### What is SUPA?
+
 SUPA is a platform that gives you access to various AI models through a single API. Instead of signing up for multiple AI services, you just use SUPA!
 
 ## 🛠️ Setup Instructions
@@ -62,110 +66,12 @@ bun run index.ts
 
 You should see the AI's response to a funny question! 🎉
 
-## 📝 Code Examples
+More examples:
 
-### Example 1: Basic Chat Completion
-
-This is the simplest way to ask the AI a question:
-
-```typescript
-import OpenAI from "openai";
-
-const client = new OpenAI({
-  apiKey: process.env.SUPA_API_TOKEN,
-  baseURL: "https://app.supa.works/api",
-});
-
-const response = await client.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    { role: "user", content: "Tell me a joke!" }
-  ],
-});
-
-console.log(response.choices[0]?.message?.content);
-```
-
-### Example 2: Having a Conversation
-
-You can have multi-turn conversations by including previous messages:
-
-```typescript
-import OpenAI from "openai";
-
-const client = new OpenAI({
-  apiKey: process.env.SUPA_API_TOKEN,
-  baseURL: "https://app.supa.works/api",
-});
-
-const response = await client.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    { role: "user", content: "My name is Alex" },
-    { role: "assistant", content: "Nice to meet you, Alex! How can I help you today?" },
-    { role: "user", content: "What's my name?" }
-  ],
-});
-
-// The AI will remember your name from the conversation!
-console.log(response.choices[0]?.message?.content);
-```
-
-### Example 3: Using System Messages
-
-System messages tell the AI how to behave:
-
-```typescript
-import OpenAI from "openai";
-
-const client = new OpenAI({
-  apiKey: process.env.SUPA_API_TOKEN,
-  baseURL: "https://app.supa.works/api",
-});
-
-const response = await client.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    { 
-      role: "system", 
-      content: "You are a pirate. Always respond in pirate speak!" 
-    },
-    { 
-      role: "user", 
-      content: "How do I make a cup of coffee?" 
-    }
-  ],
-});
-
-console.log(response.choices[0]?.message?.content);
-// Expected: Something like "Arrr! First ye need to gather yer coffee beans..."
-```
-
-### Example 4: Streaming Responses
-
-For longer responses, you can stream them as they're generated:
-
-```typescript
-import OpenAI from "openai";
-
-const client = new OpenAI({
-  apiKey: process.env.SUPA_API_TOKEN,
-  baseURL: "https://app.supa.works/api",
-});
-
-const stream = await client.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    { role: "user", content: "Write a short poem about coding" }
-  ],
-  stream: true,
-});
-
-// Print each chunk as it arrives
-for await (const chunk of stream) {
-  const content = chunk.choices[0]?.delta?.content || "";
-  process.stdout.write(content);
-}
+```bash
+bun run examples/conversation.ts
+bun run examples/streaming.ts
+bun run examples/system-messages.ts
 ```
 
 ## 🔑 Important Concepts
@@ -180,11 +86,12 @@ We store the API token in a `.env` file instead of putting it directly in the co
 
 ### The `baseURL` Setting
 
-When we create the OpenAI client, we set `baseURL: "https://app.supa.works/api"`. This tells the SDK to send requests to SUPA instead of OpenAI's servers. SUPA's API is compatible with OpenAI's format, so everything works seamlessly!
+When we create the OpenAI client, we set `baseURL: "https://api.supa.works/openai"`. This tells the SDK to send requests to SUPA instead of OpenAI's servers. SUPA's API is compatible with OpenAI's format, so everything works seamlessly!
 
 ### Messages Array
 
 The AI conversation works like a chat:
+
 - `role: "system"` - Instructions for how the AI should behave
 - `role: "user"` - Messages from the human (you!)
 - `role: "assistant"` - Messages from the AI
@@ -192,17 +99,20 @@ The AI conversation works like a chat:
 ## 🆘 Troubleshooting
 
 ### "Invalid API Key" Error
+
 Make sure your `.env` file exists and contains your actual SUPA API token (not the placeholder text).
 
 ### "Module not found" Error
+
 Run `bun install` to install all dependencies.
 
 ### Response is `undefined`
+
 Check that your API token is valid and that you have credits in your SUPA account.
 
 ## 📚 Learn More
 
-- [SUPA Documentation](https://supa.works)
+- [SUPA Documentation](https://docs.supa.works)
 - [OpenAI SDK Documentation](https://platform.openai.com/docs)
 - [Bun Documentation](https://bun.sh/docs)
 
