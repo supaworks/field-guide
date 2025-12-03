@@ -38,7 +38,7 @@ if prompt := st.chat_input("What would you like to talk about?"):
     with st.chat_message("assistant"):
         # Create streaming response from SUPA
         stream = client.chat.completions.create(
-            model="qwen3:0.6b",
+            model="supa:instant",
             messages=[
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages

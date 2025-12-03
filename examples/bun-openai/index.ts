@@ -10,7 +10,7 @@ async function askFunnyQuestion() {
   console.log("🤖 Asking the AI a funny question...\n");
 
   const response = await client.chat.completions.create({
-    model: "qwen3:0.6b",
+    model: "supa:instant",
     messages: [
       {
         role: "user",
