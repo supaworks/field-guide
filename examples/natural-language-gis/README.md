@@ -38,6 +38,7 @@ bun install
 Import the shapefiles from the `data/` directory into the database:
 
 ```bash
+bun run db:push
 bun run scripts/seed.ts
 ```
 
