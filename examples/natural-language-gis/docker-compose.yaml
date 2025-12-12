@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - 3004:3000
     environment:
       - DATABASE_URL=postgres://root:mysecretpassword@db:5434/local
       - SUPA_API_TOKEN=${SUPA_API_TOKEN}
