@@ -4,11 +4,13 @@ services:
     ports:
       - 3004:3000
     environment:
-      - DATABASE_URL=postgres://root:mysecretpassword@db:5434/local
+      - DATABASE_URL=postgres://root:mysecretpassword@db:5432/local
       - SUPA_API_TOKEN=${SUPA_API_TOKEN}
       - BASE_HREF=${BASE_HREF:-https://api.supa.works/openai}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    command: sh -c "bun run db:push && bun run scripts/seed.ts && bun run build/index.js"
   db:
     image: postgis/postgis:16-3.4
     restart: always
@@ -20,5 +22,10 @@ services:
       POSTGRES_DB: local
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 volumes:
   pgdata:
