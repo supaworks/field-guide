@@ -138,7 +138,7 @@
         if (func) return `<span class="text-purple-600">${match}</span>`;
         if (num) return `<span class="text-orange-600">${match}</span>`;
         return match;
-      },
+      }
     );
 
     // Add line numbers
@@ -149,7 +149,7 @@
           `<div class="flex gap-4">
          <span class="text-stone-300 select-none w-6 text-right flex-shrink-0">${i + 1}</span>
          <span class="whitespace-pre-wrap break-all font-mono text-sm">${line}</span>
-       </div>`,
+       </div>`
       )
       .join("");
   }
@@ -158,6 +158,10 @@
     navigator.clipboard.writeText(text);
   }
 </script>
+
+<svelte:head>
+  <title>SUPA WORKS</title>
+</svelte:head>
 
 <div class="min-h-screen bg-[#FDFBF7] text-stone-800 font-sans">
   <!-- Header -->
@@ -280,7 +284,7 @@
                 type="button"
                 onclick={() =>
                   setExample(
-                    "Find all bus stops within 1m of a tree. Limit by 100.",
+                    "Find all bus stops within 1m of a tree. Limit by 100."
                   )}
                 class="px-3 py-1 bg-stone-100 hover:bg-stone-200 text-stone-600 text-xs rounded-full transition-colors border border-stone-200"
               >
