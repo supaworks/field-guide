@@ -8,9 +8,7 @@ import path from "path";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 
-const client = postgres(
-  "postgres://root:mysecretpassword@localhost:5433/local"
-);
+const client = postgres(process.env.DATABASE_URL);
 const db = drizzle(client, { schema });
 
 async function main() {

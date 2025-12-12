@@ -1,7 +1,7 @@
 import postgres from "postgres";
 
 // Connect to the database
-const sql = postgres("postgres://root:mysecretpassword@localhost:5433/local");
+const sql = postgres(process.env.DATABASE_URL);
 
 async function main() {
   console.log("Generating schema context...");
