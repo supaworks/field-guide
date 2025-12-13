@@ -10,7 +10,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: sh -c "bun run db:push && bun run scripts/seed.ts && bun run build/index.js"
+    networks:
+      - app-network
+    command: sh -c "sleep 5; bun run db:push && bun run scripts/seed.ts && bun run build/index.js"
   db:
     image: postgis/postgis:16-3.4
     restart: always
@@ -27,5 +29,12 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
 volumes:
   pgdata:
