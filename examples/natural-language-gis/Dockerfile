@@ -7,6 +7,7 @@ RUN bun install --frozen-lockfile
 
 # Copy source
 COPY . .
+COPY data ./data
 
 # Generate SvelteKit files
 RUN bun run prepare

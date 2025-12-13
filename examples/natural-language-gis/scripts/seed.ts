@@ -8,6 +8,8 @@ import path from "path";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 
+console.log("DATA_DIR:", DATA_DIR);
+
 const client = postgres(process.env.DATABASE_URL);
 const db = drizzle(client, { schema });
 
