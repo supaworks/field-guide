@@ -194,11 +194,17 @@
   <div bind:this={mapContainer} class="w-full h-full"></div>
   {#if features.length === 0}
     <div
-      class="absolute inset-0 flex items-center justify-center bg-white/50 pointer-events-none z-10"
+      class="absolute inset-0 flex flex-col items-center justify-center bg-white/80 pointer-events-none z-10 p-6 text-center"
     >
-      <span class="text-gray-600 font-medium bg-white px-4 py-2 rounded shadow"
+      <span class="text-gray-800 font-semibold text-lg mb-2"
         >No data to display</span
       >
+      <p class="text-gray-600 max-w-md text-sm">
+        Please note: The dataset used in this demo is limited and may not
+        contain data for every query. The primary goal of this demo is to
+        showcase the LLM's ability to generate SQL queries from natural
+        language, not the completeness of the data itself.
+      </p>
     </div>
   {/if}
 </div>
